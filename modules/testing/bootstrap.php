@@ -12,12 +12,14 @@ class Testing_Bootstrap
 	 */
 	static public function defineConstants()
 	{
-		define('HOSTCMS', TRUE);
-		define('CHMOD', 664);
+		defined('HOSTCMS') or define('HOSTCMS', TRUE);
+		defined('CHMOD') or define('CHMOD', 664);
 
-    	$reflector = new ReflectionClass('Core');
-		$cmsFolder = realpath(dirname($reflector->getFileName()) . '/../../') . '/';
+		if (!defined('CMS_FOLDER')) {
+	    	$reflector = new ReflectionClass('Core');
+			$cmsFolder = realpath(dirname($reflector->getFileName()) . '/../../') . '/';
 
-		define('CMS_FOLDER', $cmsFolder);
+			define('CMS_FOLDER', $cmsFolder);
+		}
 	}
 }
